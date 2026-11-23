@@ -1,0 +1,5 @@
+prueba,estadistico,p_valor,decision
+Levene (homocedasticidad),114.76663425036963,1.5971057079444902e-49,Se rechaza H0
+ANOVA de una vía,901.0631858431287,0.0,Se rechaza H0
+Kruskal-Wallis,1302.2490301281955,1.6604128117298136e-283,Se rechaza H0
+Eta cuadrada (efecto),0.25313869674424605,,

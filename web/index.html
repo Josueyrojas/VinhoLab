@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calidad del Vino Verde · Inteligencia de Datos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<!-- MENÚ LATERAL -->
+<aside class="side" id="side" aria-label="Contenido">
+  <a href="#inicio" class="side-brand">
+    <span class="side-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-.5 6a3.5 3.5 0 0 1-7 0L8 2z"/><path d="M12 11.5V20"/><path d="M8 22h8"/></svg></span>
+    <span><b>Vinho Verde</b><small>Análisis de calidad</small></span>
+  </a>
+  <p class="side-label">Contenido</p>
+  <nav class="side-links">
+    <a href="#dataset"><span class="n">01</span>Dataset</a>
+    <a href="#tratamiento"><span class="n">02</span>Tratamiento</a>
+    <a href="#descriptiva"><span class="n">03</span>Descriptiva</a>
+    <a href="#correlacion"><span class="n">04</span>Correlación</a>
+    <a href="#hipotesis"><span class="n">05</span>Hipótesis</a>
+    <a href="#modelo"><span class="n">06</span>Modelo</a>
+    <a href="#simulador"><span class="n">07</span>Simulador</a>
+    <a href="#spss"><span class="n">08</span>Python vs SPSS</a>
+    <a href="#conclusiones"><span class="n">09</span>Conclusiones</a>
+  </nav>
+  <div class="side-foot"><strong id="side-materia"></strong><span id="side-inst"></span></div>
+</aside>
+<div class="side-overlay" id="side-overlay"></div>
+
+<div class="page">
+
+<!-- BARRA SUPERIOR (solo celular) -->
+<div class="topbar">
+  <a href="#inicio" class="side-brand">
+    <span class="side-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-.5 6a3.5 3.5 0 0 1-7 0L8 2z"/><path d="M12 11.5V20"/><path d="M8 22h8"/></svg></span>
+    <span><b>Vinho Verde</b></span>
+  </a>
+  <button class="menu-btn" id="menu-btn" aria-label="Abrir menú" aria-controls="side" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+</div>
+
+<!-- HERO -->
+<header id="inicio" class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow" id="hero-materia"></p>
+    <h1 id="hero-titulo"></h1>
+    <p class="hero-sub">Estadística descriptiva, inferencial y tratamiento de datos con <strong>Python</strong> y <strong>SPSS</strong> sobre el dataset <em>Wine Quality</em> (UCI).</p>
+    <div class="kpis" id="hero-kpis"></div>
+    <div class="team" id="hero-team"></div>
+  </div>
+  <div class="hero-glass" aria-hidden="true">
+    <svg viewBox="0 0 200 320"><path d="M40 20 H160 C165 110 150 170 100 185 C50 170 35 110 40 20 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M45 90 C80 100 120 80 155 90 C152 150 135 172 100 180 C65 172 48 150 45 90 Z" fill="currentColor" opacity=".55"/><line x1="100" y1="185" x2="100" y2="280" stroke="currentColor" stroke-width="2"/><ellipse cx="100" cy="290" rx="50" ry="10" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+  </div>
+</header>
+
+<main>
+
+<!-- 01 DATASET -->
+<section id="dataset" class="section">
+  <div class="section-head"><span class="num">01</span><h2>El dataset</h2></div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Wine Quality · UCI Machine Learning Repository</h3>
+      <p class="muted">Muestras de vino verde portugués (tinto y blanco) con 11 propiedades fisicoquímicas medidas en laboratorio y una calificación sensorial de 0 a 10 asignada por catadores expertos.</p>
+      <blockquote class="cita" id="cita"></blockquote>
+      <a class="link" href="https://archive.ics.uci.edu/dataset/186/wine+quality" target="_blank" rel="noopener">archive.ics.uci.edu/dataset/186 ↗</a>
+    </div>
+    <div class="card"><div id="chart-tipos" class="chart chart-sm"></div></div>
+  </div>
+  <div class="card mt">
+    <h3>Diccionario de variables</h3>
+    <div class="table-wrap"><table id="tabla-variables"></table></div>
+  </div>
+</section>
+
+<!-- 02 TRATAMIENTO -->
+<section id="tratamiento" class="section">
+  <div class="section-head"><span class="num">02</span><h2>Tratamiento de datos</h2></div>
+  <div class="flow" id="flow-limpieza"></div>
+  <div class="card mt">
+    <h3>Valores atípicos por variable <span class="tag">criterio IQR</span></h3>
+    <p class="muted">Porcentaje de registros fuera de [Q1 − 1.5·IQR, Q3 + 1.5·IQR]. Se aplicó winsorización a los percentiles 1–99 para reducir su influencia sin eliminar registros.</p>
+    <div id="chart-outliers" class="chart"></div>
+  </div>
+</section>
+
+<!-- 03 DESCRIPTIVA -->
+<section id="descriptiva" class="section">
+  <div class="section-head"><span class="num">03</span><h2>Estadística descriptiva</h2></div>
+  <div class="card">
+    <h3>Distribución de la calidad</h3>
+    <div id="chart-calidad" class="chart"></div>
+  </div>
+  <div class="card mt">
+    <div class="card-head">
+      <h3>Explora cada variable</h3>
+      <div class="chips" id="chips-variables"></div>
+    </div>
+    <div class="grid-2">
+      <div id="chart-hist" class="chart"></div>
+      <div id="chart-box" class="chart"></div>
+    </div>
+  </div>
+  <div class="card mt">
+    <h3>Medidas de tendencia central, dispersión y forma</h3>
+    <div class="table-wrap"><table id="tabla-descriptiva"></table></div>
+  </div>
+</section>
+
+<!-- 04 CORRELACION -->
+<section id="correlacion" class="section">
+  <div class="section-head"><span class="num">04</span><h2>Correlación</h2></div>
+  <div class="grid-2-wide">
+    <div class="card"><h3>Matriz de Pearson</h3><div id="chart-heatmap" class="chart chart-lg"></div></div>
+    <div class="card"><h3>Relación con la calidad</h3><p class="muted">ρ de Spearman de cada variable con la calidad.</p><div id="chart-corr-calidad" class="chart chart-lg"></div></div>
+  </div>
+</section>
+
+<!-- 05 HIPOTESIS -->
+<section id="hipotesis" class="section">
+  <div class="section-head"><span class="num">05</span><h2>Estadística inferencial</h2></div>
+  <p class="lead">Seis pruebas de hipótesis con nivel de significancia <strong id="alpha"></strong>. Haz clic en una tarjeta para ver el detalle.</p>
+  <div class="hip-grid" id="hip-grid"></div>
+  <div class="card mt hidden" id="hip-detalle"></div>
+</section>
+
+<!-- 06 MODELO -->
+<section id="modelo" class="section">
+  <div class="section-head"><span class="num">06</span><h2>Modelo predictivo</h2></div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Regresión <span class="tag">predecir calidad 0–10</span></h3>
+      <div class="table-wrap"><table id="tabla-reg"></table></div>
+    </div>
+    <div class="card">
+      <h3>Clasificación <span class="tag">¿buen vino? (calidad ≥ 7)</span></h3>
+      <div class="table-wrap"><table id="tabla-clf"></table></div>
+    </div>
+  </div>
+  <div class="grid-2 mt">
+    <div class="card"><h3>Importancia de variables <span class="tag">Random Forest</span></h3><div id="chart-importancia" class="chart"></div></div>
+    <div class="card"><h3>Matriz de confusión <span class="tag">Random Forest</span></h3><div id="chart-cm" class="chart"></div></div>
+  </div>
+</section>
+
+<!-- 07 SIMULADOR -->
+<section id="simulador" class="section">
+  <div class="section-head"><span class="num">07</span><h2>Simulador de calidad</h2></div>
+  <p class="lead">Ajusta las propiedades fisicoquímicas y el modelo estima la calidad del vino en tiempo real.</p>
+  <div class="sim">
+    <div class="card sim-controls">
+      <div class="sim-top">
+        <div class="toggle" id="sim-tipo">
+          <button data-tipo="tinto" class="active">Tinto</button>
+          <button data-tipo="blanco">Blanco</button>
+        </div>
+        <button class="btn-ghost" id="sim-reset">Restablecer medianas</button>
+      </div>
+      <div id="sim-sliders"></div>
+    </div>
+    <div class="card sim-result">
+      <div id="chart-gauge" class="chart"></div>
+      <div class="sim-prob">
+        <div class="sim-prob-label"><span>Probabilidad de ser <strong>buen vino</strong> (≥ 7)</span><span id="sim-prob-val"></span></div>
+        <div class="bar"><div class="bar-fill" id="sim-prob-bar"></div></div>
+      </div>
+      <p class="sim-veredicto" id="sim-veredicto"></p>
+      <p class="muted small">Modelos: regresión lineal múltiple (calidad) y regresión logística (probabilidad), entrenados con los datos estandarizados.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 SPSS -->
+<section id="spss" class="section">
+  <div class="section-head"><span class="num">08</span><h2>Python vs SPSS</h2></div>
+  <p class="lead">Las mismas pruebas ejecutadas sobre <code>wine_limpio.csv</code> en ambas herramientas.</p>
+  <div class="card"><div class="table-wrap"><table id="tabla-spss"></table></div>
+    <p class="muted small" id="spss-nota"></p></div>
+</section>
+
+<!-- 09 CONCLUSIONES -->
+<section id="conclusiones" class="section">
+  <div class="section-head"><span class="num">09</span><h2>Conclusiones</h2></div>
+  <div class="conclusiones" id="lista-conclusiones"></div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p id="footer-inst"></p>
+  <p class="small">Referencias: Cortez, P., Cerdeira, A., Almeida, F., Matos, T., & Reis, J. (2009). Modeling wine preferences by data mining from physicochemical properties. <em>Decision Support Systems, 47</em>(4), 547–553. · Dataset: UCI Machine Learning Repository, https://doi.org/10.24432/C56S3T</p>
+</footer>
+
+</div><!-- /page -->
+
+<script src="vendor/plotly.min.js"></script>
+<script>window.Plotly || document.write('<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"><\/script>')</script>
+<script src="data/resultados.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

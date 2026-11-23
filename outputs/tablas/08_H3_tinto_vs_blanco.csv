@@ -1,0 +1,5 @@
+prueba,estadistico,p_valor,decision
+t de Welch,-8.756837084597814,3.6047291257042275e-18,Se rechaza H0
+Mann-Whitney U,2290875.0,1.9989049879281352e-18,Se rechaza H0
+d de Cohen (efecto),-0.26997646555307825,,
+media tinto / blanco,5.6232523914643116,5.854834637717748,
