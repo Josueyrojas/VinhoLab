@@ -23,7 +23,7 @@
 | 4 | Estadística inferencial | Tablas 06–14 | Andrea |
 | 5 | Análisis en SPSS | Salidas del visor + tabla comparativa | Enrique |
 | 6 | Modelo predictivo | Tablas 15–18, figuras 06–07 | Josué |
-| 7 | Reporte final | Documento (ver `estructura_reporte.md`) | Angel + todos |
+| 7 | Reporte final | `reporte_final.md` (borrador con resultados de Python; con resultados de SPSS; faltan capturas y portada) | Angel + todos |
 | 8 | Sitio web | `web/index.html` publicado (Netlify / GitHub Pages) | Josué |
 | 9 | Presentación | Exposición recorriendo el sitio + demo del simulador | Todos |
 

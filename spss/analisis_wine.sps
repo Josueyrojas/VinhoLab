@@ -8,7 +8,7 @@
 * -------- 1. Carga de datos --------.
 GET DATA
   /TYPE=TXT
-  /FILE="C:\RUTA\AL\PROYECTO\data\processed\wine_limpio.csv"
+  /FILE="C:\Users\agrod\VinhoLab\data\processed\wine_limpio.csv"
   /ENCODING='UTF8'
   /DELIMITERS=","
   /QUALIFIER='"'
@@ -113,11 +113,13 @@ CROSSTABS
   /CELLS=COUNT ROW EXPECTED.
 
 * -------- 8. H6: Regresión lineal múltiple --------.
+* METHOD=ENTER mete las 12 variables a la vez, igual que Python (R² = 0.317, F = 205.1).
+* Si quieren el modelo por pasos, cambien ENTER por STEPWISE (R² y F ya no serán comparables).
 REGRESSION
   /DESCRIPTIVES MEAN STDDEV CORR SIG N
   /STATISTICS COEFF OUTS R ANOVA COLLIN TOL CHANGE
   /DEPENDENT quality
-  /METHOD=STEPWISE fixed_acidity volatile_acidity citric_acid residual_sugar chlorides
+  /METHOD=ENTER fixed_acidity volatile_acidity citric_acid residual_sugar chlorides
     free_sulfur_dioxide total_sulfur_dioxide density pH sulphates alcohol tipo_num
   /SCATTERPLOT=(*ZRESID ,*ZPRED)
   /RESIDUALS HISTOGRAM(ZRESID) NORMPROB(ZRESID) DURBIN.
