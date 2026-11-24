@@ -41,7 +41,9 @@ wine-quality-proyecto/
 │   ├── tablas/               # CSV/TXT numerados en orden del reporte
 │   └── modelos/              # modelos entrenados (.joblib)
 └── docs/
+    ├── Investigacion_Dataset_Trabajo_Final.pdf  # fase 0: investigación del dataset
     ├── plan_de_trabajo.md    # fases, roles y entregables
+    ├── reporte_final.md      # borrador del reporte con los resultados reales
     └── estructura_reporte.md # índice del documento final
 ```
 
